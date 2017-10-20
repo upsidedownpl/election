@@ -16,6 +16,12 @@ public class AddressServiceImpl implements AddressService {
 	@Autowired
 	private AddressDao addressDao;
 	
+	@Override
+	@Transactional
+	public Country getCountryByName(String name) {
+		return addressDao.getCountryByName(name);
+	}
+	
 	@Transactional
 	@Override
 	public Country createCountry(String name) {

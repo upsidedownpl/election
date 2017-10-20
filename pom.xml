@@ -4,6 +4,7 @@
 	<groupId>pl.mm.election</groupId>
 	<artifactId>election</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
 
 	<properties>
 		<hibernate.version>5.2.11.Final</hibernate.version>
@@ -19,6 +20,10 @@
 		<guava.version>23.0</guava.version>
 		<activemq.version>5.7.0</activemq.version>
 		<jms.version>2.0.1</jms.version>
+		<jersey.version>2.26</jersey.version>
+		<jsr311.version>1.1.1</jsr311.version>
+		<jersey-test.version>2.26</jersey-test.version>
+		<javaxel.version>3.0.1-b08</javaxel.version>
 	</properties>
 
 	<dependencies>
@@ -84,6 +89,22 @@
 			<version>${jms.version}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.glassfish.jersey.core</groupId>
+			<artifactId>jersey-server</artifactId>
+			<version>${jersey.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.ext</groupId>
+			<artifactId>jersey-spring4</artifactId>
+			<version>${jersey.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish</groupId>
+			<artifactId>javax.el</artifactId>
+			<version>${javaxel.version}</version>
+		</dependency>
+
 
 		<dependency>
 			<groupId>com.atomikos</groupId>
@@ -138,7 +159,24 @@
 			<scope>test</scope>
 		</dependency>
 
-
+		<dependency>
+			<groupId>org.glassfish.jersey.test-framework.providers</groupId>
+			<artifactId>jersey-test-framework-provider-jdk-http</artifactId>
+			<version>${jersey-test.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.test-framework.providers</groupId>
+			<artifactId>jersey-test-framework-provider-grizzly2</artifactId>
+			<version>${jersey-test.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.inject</groupId>
+			<artifactId>jersey-hk2</artifactId>
+			<version>${jersey-test.version}</version>
+			<scope>test</scope>
+		</dependency>
 
 	</dependencies>
 

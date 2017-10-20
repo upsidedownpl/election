@@ -31,11 +31,6 @@
 		</property>
 	</bean>
 
-	<jdbc:initialize-database data-source="dataSource">
-		<jdbc:script location="org/springframework/batch/core/schema-drop-h2.sql" />
-		<jdbc:script location="org/springframework/batch/core/schema-h2.sql" />
-	</jdbc:initialize-database>
-
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="persistenceXmlLocation" value="classpath:META-INF/persistence.xml" />

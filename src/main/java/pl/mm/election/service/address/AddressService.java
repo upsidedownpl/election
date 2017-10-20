@@ -8,6 +8,8 @@ import pl.mm.election.model.Street;
 public interface AddressService {
 
 	Country createCountry(String name);
+	
+	Country getCountryByName(String name);
 
 	City createCity(String name, String zip, Country country);
 
