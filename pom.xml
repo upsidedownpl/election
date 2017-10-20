@@ -24,6 +24,7 @@
 		<jsr311.version>1.1.1</jsr311.version>
 		<jersey-test.version>2.26</jersey-test.version>
 		<javaxel.version>3.0.1-b08</javaxel.version>
+		<moxy.version>2.7.0</moxy.version>
 	</properties>
 
 	<dependencies>
@@ -104,6 +105,18 @@
 			<artifactId>javax.el</artifactId>
 			<version>${javaxel.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.media</groupId>
+			<artifactId>jersey-media-json-jackson</artifactId>
+			<version>${jersey.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.persistence</groupId>
+			<artifactId>org.eclipse.persistence.moxy</artifactId>
+			<version>${moxy.version}</version>
+		</dependency>
+
 
 
 		<dependency>
