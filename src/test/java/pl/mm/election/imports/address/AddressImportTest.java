@@ -29,6 +29,9 @@ import pl.mm.election.dao.AddressDao;
 import pl.mm.election.model.po.City;
 import pl.mm.election.model.po.Country;
 import pl.mm.election.model.po.Street;
+import pl.mm.election.model.to.CityTo;
+import pl.mm.election.model.to.CountryTo;
+import pl.mm.election.model.to.StreetTo;
 import pl.mm.election.service.address.AddressService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -149,9 +152,9 @@ public class AddressImportTest {
 	@Test
 	public void testCountryExists() throws JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException, JobParametersInvalidException {
 		// given
-		Country country = addressService.createCountry("Poland");
-		City city = addressService.createCity("Warszawa", "11-111", country);
-		Street street = addressService.createStreet("Marszałkowska", city);
+		CountryTo country = addressService.createCountry("Poland");
+		CityTo city = addressService.createCity("Warszawa", "11-111", country);
+		StreetTo street = addressService.createStreet("Marszałkowska", city);
 		addressService.createAddress("1", street);
 		
 		JobParameters jobParameters = new JobParametersBuilder()
@@ -173,9 +176,9 @@ public class AddressImportTest {
 	@Test
 	public void testCityExists() throws JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException, JobParametersInvalidException {
 		// given
-		Country country = addressService.createCountry("Poland");
-		City city = addressService.createCity("Warszawa", "11-111", country);
-		Street street = addressService.createStreet("Marszałkowska", city);
+		CountryTo country = addressService.createCountry("Poland");
+		CityTo city = addressService.createCity("Warszawa", "11-111", country);
+		StreetTo street = addressService.createStreet("Marszałkowska", city);
 		addressService.createAddress("1", street);
 		
 		JobParameters jobParameters = new JobParametersBuilder()
@@ -197,9 +200,9 @@ public class AddressImportTest {
 	@Test
 	public void testStreetExists() throws JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException, JobParametersInvalidException {
 		// given
-		Country country = addressService.createCountry("Poland");
-		City city = addressService.createCity("Warszawa", "11-111", country);
-		Street street = addressService.createStreet("Marszałkowska", city);
+		CountryTo country = addressService.createCountry("Poland");
+		CityTo city = addressService.createCity("Warszawa", "11-111", country);
+		StreetTo street = addressService.createStreet("Marszałkowska", city);
 		addressService.createAddress("1", street);
 		
 		JobParameters jobParameters = new JobParametersBuilder()
@@ -221,9 +224,9 @@ public class AddressImportTest {
 	@Test
 	public void testAddressExists() throws JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException, JobParametersInvalidException {
 		// given
-		Country country = addressService.createCountry("Poland");
-		City city = addressService.createCity("Warszawa", "11-111", country);
-		Street street = addressService.createStreet("Marszałkowska", city);
+		CountryTo country = addressService.createCountry("Poland");
+		CityTo city = addressService.createCity("Warszawa", "11-111", country);
+		StreetTo street = addressService.createStreet("Marszałkowska", city);
 		addressService.createAddress("1", street);
 		
 		JobParameters jobParameters = new JobParametersBuilder()

@@ -27,6 +27,7 @@ import com.google.common.collect.Iterables;
 
 import pl.mm.election.dao.UserDao;
 import pl.mm.election.model.po.User;
+import pl.mm.election.model.to.UserTo;
 import pl.mm.election.service.encryption.AuthenticateService;
 import pl.mm.election.service.encryption.EncryptionException;
 import pl.mm.election.service.user.UserCreationException;
@@ -103,7 +104,7 @@ public class UserImportTest {
 				.addString("pathToFile", "imports/user/single.csv")
 				.toJobParameters();
 		
-		User admin = new User();
+		UserTo admin = new UserTo();
 		admin.setLogin("admin");
 		userService.create(admin, "old");
 		
@@ -116,8 +117,8 @@ public class UserImportTest {
 		assertThat(execution.getStatus(), equalTo(BatchStatus.COMPLETED));
 		assertThat(userDao.count(), equalTo(1L));
 		
-		admin = userDao.read("admin");
-		assertThat(admin, notNullValue());
+		User adminPersistent = userDao.read("admin");
+		assertThat(adminPersistent, notNullValue());
 		
 		assertThat(authenticateService.authenticateUser("admin", "old"), 
 				equalTo(true));

@@ -7,7 +7,7 @@ import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pl.mm.election.model.po.Country;
+import pl.mm.election.model.to.CountryTo;
 
 @Path("/address")
 public class RestAddressService {
@@ -18,7 +18,7 @@ public class RestAddressService {
 	@GET
 	@Path("/country/{name}")
 	public Response getCountry(@PathParam("name") String name) {
-		Country country = addressService.getCountryByName(name);
+		CountryTo country = addressService.getCountryByName(name);
 		if(country == null) {
 			return Response.status(404).build();
 		} else {

@@ -1,20 +1,20 @@
 package pl.mm.election.service.address;
 
-import pl.mm.election.model.po.Address;
-import pl.mm.election.model.po.City;
-import pl.mm.election.model.po.Country;
-import pl.mm.election.model.po.Street;
+import pl.mm.election.model.to.AddressTo;
+import pl.mm.election.model.to.CityTo;
+import pl.mm.election.model.to.CountryTo;
+import pl.mm.election.model.to.StreetTo;
 
 public interface AddressService {
 
-	Country createCountry(String name);
+	CountryTo createCountry(String name);
 	
-	Country getCountryByName(String name);
+	CountryTo getCountryByName(String name);
 
-	City createCity(String name, String zip, Country country);
+	CityTo createCity(String name, String zip, CountryTo country);
 
-	Street createStreet(String name, City city);
+	StreetTo createStreet(String name, CityTo city);
 
-	Address createAddress(String number, Street street);
+	AddressTo createAddress(String number, StreetTo street);
 
 }
