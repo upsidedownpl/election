@@ -7,7 +7,7 @@ import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pl.mm.election.model.Country;
+import pl.mm.election.model.po.Country;
 
 @Path("/address")
 public class RestAddressService {

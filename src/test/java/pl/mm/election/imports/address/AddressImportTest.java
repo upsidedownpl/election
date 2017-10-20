@@ -26,9 +26,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.google.common.collect.Iterables;
 
 import pl.mm.election.dao.AddressDao;
-import pl.mm.election.model.City;
-import pl.mm.election.model.Country;
-import pl.mm.election.model.Street;
+import pl.mm.election.model.po.City;
+import pl.mm.election.model.po.Country;
+import pl.mm.election.model.po.Street;
 import pl.mm.election.service.address.AddressService;
 
 @RunWith(SpringJUnit4ClassRunner.class)

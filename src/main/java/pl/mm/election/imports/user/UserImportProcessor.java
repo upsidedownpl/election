@@ -17,7 +17,7 @@ import com.google.common.base.Splitter;
 import com.google.common.collect.Streams;
 import com.google.common.primitives.Bytes;
 
-import pl.mm.election.model.User;
+import pl.mm.election.model.po.User;
 
 public class UserImportProcessor implements ItemProcessor<UserImport, User>{
 

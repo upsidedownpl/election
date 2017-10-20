@@ -10,14 +10,14 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Service;
 
-import pl.mm.election.model.Address;
-import pl.mm.election.model.Address_;
-import pl.mm.election.model.City;
-import pl.mm.election.model.City_;
-import pl.mm.election.model.Country;
-import pl.mm.election.model.Country_;
-import pl.mm.election.model.Street;
-import pl.mm.election.model.Street_;
+import pl.mm.election.model.po.Address_;
+import pl.mm.election.model.po.City_;
+import pl.mm.election.model.po.Country_;
+import pl.mm.election.model.po.Street_;
+import pl.mm.election.model.po.Address;
+import pl.mm.election.model.po.City;
+import pl.mm.election.model.po.Country;
+import pl.mm.election.model.po.Street;
 
 @Service
 public class AddressDaoImpl implements AddressDao {

@@ -6,10 +6,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.batch.item.ItemProcessor;
 
 import pl.mm.election.dao.AddressDao;
-import pl.mm.election.model.Address;
-import pl.mm.election.model.City;
-import pl.mm.election.model.Country;
-import pl.mm.election.model.Street;
+import pl.mm.election.model.po.Address;
+import pl.mm.election.model.po.City;
+import pl.mm.election.model.po.Country;
+import pl.mm.election.model.po.Street;
 
 public class AddressImportProcessor implements ItemProcessor<AddressImport, AddressImportTo>{
 

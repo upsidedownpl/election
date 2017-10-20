@@ -1,6 +1,6 @@
 package pl.mm.election.service.user;
 
-import pl.mm.election.model.User;
+import pl.mm.election.model.po.User;
 
 public interface UserService {
 

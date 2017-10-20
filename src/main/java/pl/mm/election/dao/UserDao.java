@@ -2,7 +2,7 @@ package pl.mm.election.dao;
 
 import java.util.List;
 
-import pl.mm.election.model.User;
+import pl.mm.election.model.po.User;
 
 public interface UserDao {
 

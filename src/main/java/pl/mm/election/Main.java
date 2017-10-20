@@ -11,7 +11,7 @@ import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.beans.BeansException;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import pl.mm.election.model.User;
+import pl.mm.election.model.po.User;
 import pl.mm.election.service.encryption.EncryptionException;
 import pl.mm.election.service.encryption.EncryptionService;
 import pl.mm.election.service.user.UserCreationException;

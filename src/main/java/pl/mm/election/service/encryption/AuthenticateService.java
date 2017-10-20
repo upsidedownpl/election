@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import pl.mm.election.dao.UserDaoImpl;
-import pl.mm.election.model.User;
+import pl.mm.election.model.po.User;
 
 @Service
 public class AuthenticateService {

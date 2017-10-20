@@ -11,7 +11,7 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Service;
 
-import pl.mm.election.model.User;
+import pl.mm.election.model.po.User;
 
 @Service
 public class UserDaoImpl implements UserDao {

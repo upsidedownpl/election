@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import pl.mm.election.dao.UserDao;
-import pl.mm.election.model.User;
+import pl.mm.election.model.po.User;
 import pl.mm.election.service.encryption.EncryptionException;
 import pl.mm.election.service.encryption.EncryptionServiceImpl;
 

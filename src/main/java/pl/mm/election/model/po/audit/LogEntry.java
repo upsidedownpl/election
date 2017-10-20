@@ -1,4 +1,4 @@
-package pl.mm.election.model.audit;
+package pl.mm.election.model.po.audit;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

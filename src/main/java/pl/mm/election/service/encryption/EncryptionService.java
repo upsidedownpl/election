@@ -1,6 +1,6 @@
 package pl.mm.election.service.encryption;
 
-import pl.mm.election.model.HasPassword;
+import pl.mm.election.model.po.HasPassword;
 
 public interface EncryptionService {
 

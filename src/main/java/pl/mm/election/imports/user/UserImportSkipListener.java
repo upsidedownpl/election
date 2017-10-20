@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.SkipListener;
 
-import pl.mm.election.model.User;
+import pl.mm.election.model.po.User;
 
 public class UserImportSkipListener implements SkipListener<UserImport, User> {
 	

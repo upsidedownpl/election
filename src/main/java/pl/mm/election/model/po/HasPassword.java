@@ -1,4 +1,4 @@
-package pl.mm.election.model;
+package pl.mm.election.model.po;
 
 public interface HasPassword {
 

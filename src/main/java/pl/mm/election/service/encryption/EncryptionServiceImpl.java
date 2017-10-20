@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import pl.mm.election.model.HasPassword;
+import pl.mm.election.model.po.HasPassword;
 
 @Service
 public class EncryptionServiceImpl implements EncryptionService {

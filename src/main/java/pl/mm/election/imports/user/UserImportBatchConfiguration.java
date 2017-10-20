@@ -24,7 +24,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.task.TaskExecutor;
 
 import pl.mm.election.imports.JobCompletionNotificationListener;
-import pl.mm.election.model.User;
+import pl.mm.election.model.po.User;
 
 @Configuration
 public class UserImportBatchConfiguration {

@@ -6,10 +6,10 @@
 	version="2.0">
 
 	<persistence-unit name="pu" transaction-type="JTA">
-		<class>pl.mm.election.model.User</class>
-		<class>pl.mm.election.model.Street</class>
-		<class>pl.mm.election.model.City</class>
-		<class>pl.mm.election.model.audit.LogEntry</class>
+		<class>pl.mm.election.model.po.User</class>
+		<class>pl.mm.election.model.po.Street</class>
+		<class>pl.mm.election.model.po.City</class>
+		<class>pl.mm.election.model.po.audit.LogEntry</class>
 		<properties>
 			<property name="hibernate.transaction.jta.platform"
   				value="com.atomikos.icatch.jta.hibernate4.AtomikosPlatform"/>

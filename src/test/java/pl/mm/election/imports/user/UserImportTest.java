@@ -26,7 +26,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.google.common.collect.Iterables;
 
 import pl.mm.election.dao.UserDao;
-import pl.mm.election.model.User;
+import pl.mm.election.model.po.User;
 import pl.mm.election.service.encryption.AuthenticateService;
 import pl.mm.election.service.encryption.EncryptionException;
 import pl.mm.election.service.user.UserCreationException;
