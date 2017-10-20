@@ -1,0 +1,4 @@
+Country;ZIP;City;Street;number
+Poland;12-345;Kraków;Floriańska;2
+Poland;;;Floriańska;2
+USA;12-345;New York;123;3
