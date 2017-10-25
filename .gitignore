@@ -3,3 +3,4 @@
 /.project
 /.classpath
 /activemq-data/
+/tmlog*.log

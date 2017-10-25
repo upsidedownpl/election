@@ -8,7 +8,7 @@ import javax.persistence.Lob;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 @Entity
-public class User implements HasPassword {
+public class User implements HasPassword, Persistent {
 
 	@Id
 	private String login;

@@ -1,12 +1,10 @@
 package pl.mm.election.model.po;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class Names {
+public class Names  implements Persistent {
 
 	@Column(nullable = false)
 	private String firstName;

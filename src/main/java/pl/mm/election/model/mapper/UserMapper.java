@@ -3,9 +3,13 @@ package pl.mm.election.model.mapper;
 import pl.mm.election.model.po.User;
 import pl.mm.election.model.to.UserTo;
 
-public class UserMapper {
+class UserMapper implements Mapper<UserTo, User>{
 	
-	public static User toPersistent(UserTo to) {
+	UserMapper() {
+		//
+	}
+	
+	public User toPersistent(UserTo to) {
 		if(to == null) {
 			return null;
 		}
@@ -15,7 +19,7 @@ public class UserMapper {
 		return po;
 	}
 	
-	public static UserTo toTransfer(User po) {
+	public UserTo toTransfer(User po) {
 		if(po == null) {
 			return null;
 		}
@@ -25,4 +29,13 @@ public class UserMapper {
 		return to;
 	}
 	
+	@Override
+	public Class<User> persistentClass() {
+		return User.class;
+	}
+	
+	@Override
+	public Class<UserTo> transferClass() {
+		return UserTo.class;
+	}
 }

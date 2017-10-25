@@ -3,9 +3,13 @@ package pl.mm.election.model.mapper;
 import pl.mm.election.model.po.Names;
 import pl.mm.election.model.to.NamesTo;
 
-public class NamesMapper {
+class NamesMapper implements Mapper<NamesTo, Names>{
 	
-	public static Names toPersistent(NamesTo to) {
+	NamesMapper() {
+		//
+	}
+	
+	public Names toPersistent(NamesTo to) {
 		if(to == null) {
 			return null;
 		}
@@ -16,7 +20,7 @@ public class NamesMapper {
 		return po;
 	}
 	
-	public static NamesTo toTransfer(Names po) {
+	public NamesTo toTransfer(Names po) {
 		if(po == null) {
 			return null;
 		}
@@ -25,6 +29,16 @@ public class NamesMapper {
 		to.setFirstName(po.getFirstName());
 		to.setLastName(po.getLastName());
 		return to;
+	}
+	
+	@Override
+	public Class<Names> persistentClass() {
+		return Names.class;
+	}
+	
+	@Override
+	public Class<NamesTo> transferClass() {
+		return NamesTo.class;
 	}
 	
 }

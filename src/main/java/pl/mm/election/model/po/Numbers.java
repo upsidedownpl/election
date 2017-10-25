@@ -4,7 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class Numbers {
+public class Numbers implements Persistent {
 
 	@Column(nullable = false)
 	private String pesel;

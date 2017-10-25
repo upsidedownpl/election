@@ -1,6 +1,6 @@
 package pl.mm.election.model.to;
 
-public class NumbersTo {
+public class NumbersTo implements Transfer {
 	
 	public static class NumbersToBuilder {
 		

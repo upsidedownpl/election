@@ -2,7 +2,7 @@ package pl.mm.election.model.to;
 
 import java.util.Date;
 
-public class DatesTo {
+public class DatesTo implements Transfer {
 	
 	public static class DatesToBuilder {
 		

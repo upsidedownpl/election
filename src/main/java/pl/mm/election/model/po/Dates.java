@@ -6,7 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class Dates {
+public class Dates implements Persistent {
 
 	@Column(nullable = false)
 	private Date birthDate;

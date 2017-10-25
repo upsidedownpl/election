@@ -1,6 +1,6 @@
 package pl.mm.election.model.to;
 
-public class StreetTo {
+public class StreetTo implements Transfer {
 
 	private Integer id;
 	

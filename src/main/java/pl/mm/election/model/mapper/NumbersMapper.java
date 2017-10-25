@@ -3,9 +3,13 @@ package pl.mm.election.model.mapper;
 import pl.mm.election.model.po.Numbers;
 import pl.mm.election.model.to.NumbersTo;
 
-public class NumbersMapper {
+class NumbersMapper implements Mapper<NumbersTo, Numbers>{
 	
-	public static Numbers toPersistent(NumbersTo to) {
+	NumbersMapper() {
+		//
+	}
+	
+	public Numbers toPersistent(NumbersTo to) {
 		if(to == null) {
 			return null;
 		}
@@ -15,7 +19,7 @@ public class NumbersMapper {
 		return po;
 	}
 	
-	public static NumbersTo toTransfer(Numbers po) {
+	public NumbersTo toTransfer(Numbers po) {
 		if(po == null) {
 			return null;
 		}
@@ -25,4 +29,13 @@ public class NumbersMapper {
 		return to;
 	}
 	
+	@Override
+	public Class<Numbers> persistentClass() {
+		return Numbers.class;
+	}
+	
+	@Override
+	public Class<NumbersTo> transferClass() {
+		return NumbersTo.class;
+	}
 }

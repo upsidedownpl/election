@@ -4,7 +4,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "country")
-public class CountryTo {
+public class CountryTo implements Transfer {
 
 	private Integer id;
 

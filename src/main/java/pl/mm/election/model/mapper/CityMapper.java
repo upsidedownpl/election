@@ -2,10 +2,11 @@ package pl.mm.election.model.mapper;
 
 import pl.mm.election.model.po.City;
 import pl.mm.election.model.to.CityTo;
+import static pl.mm.election.model.mapper.MapperFactory.map;
 
-public class CityMapper {
+class CityMapper implements Mapper<CityTo, City>{
 	
-	public static City toPersistent(CityTo to) {
+	public City toPersistent(CityTo to) {
 		if(to == null) {
 			return null;
 		}
@@ -14,11 +15,11 @@ public class CityMapper {
 		po.setName(to.getName());
 		po.setId(to.getId());
 		po.setZip(to.getZip());
-		po.setCountry(CountryMapper.toPersistent(to.getCountry()));
+		po.setCountry(map(to.getCountry()));
 		return po;
 	}
 	
-	public static CityTo toTransfer(City po) {
+	public CityTo toTransfer(City po) {
 		if(po == null) {
 			return null;
 		}
@@ -27,8 +28,17 @@ public class CityMapper {
 		to.setName(po.getName());
 		to.setId(po.getId());
 		to.setZip(po.getZip());
-		to.setCountry(CountryMapper.toTransfer(po.getCountry()));
+		to.setCountry(map(po.getCountry()));
 		return to;
 	}
 	
+	@Override
+	public Class<City> persistentClass() {
+		return City.class;
+	}
+	
+	@Override
+	public Class<CityTo> transferClass() {
+		return CityTo.class;
+	}
 }

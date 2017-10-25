@@ -1,14 +1,12 @@
 package pl.mm.election.service.address;
 
+import static pl.mm.election.model.mapper.MapperFactory.map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import pl.mm.election.dao.address.AddressDao;
-import pl.mm.election.model.mapper.AddressMapper;
-import pl.mm.election.model.mapper.CityMapper;
-import pl.mm.election.model.mapper.CountryMapper;
-import pl.mm.election.model.mapper.StreetMapper;
 import pl.mm.election.model.po.Address;
 import pl.mm.election.model.po.City;
 import pl.mm.election.model.po.Country;
@@ -26,27 +24,28 @@ public class AddressServiceImpl implements AddressService {
 	
 	@Override
 	public CountryTo getCountryByName(String name) {
-		return CountryMapper.toTransfer(addressDao.getCountryByName(name));
+		return map(addressDao.getCountryByName(name));
 	}
 	
 	@Override
 	public StreetTo getStreetByNameAndCity(String name, CityTo city) {
-		return StreetMapper.toTransfer(
+		return map(
 				addressDao.getStreetByNameAndCity(name, 
-						CityMapper.toPersistent(city)));
+						map(city)));
 	}
 	
 	@Override
 	public CityTo getCityByZipAndCountry(String zip, CountryTo country) {
-		return CityMapper.toTransfer(
+		return map(
 				addressDao.getCityByZipAndCountry(zip, 
-						CountryMapper.toPersistent(country)));
+						map(country)));
 	}
 	
 	@Override
 	public AddressTo getAddressByStreetAndNumber(StreetTo street, String number) {
-		return AddressMapper.toTransfer(
-				addressDao.getAddressByStreetAndNumber(StreetMapper.toPersistent(street), 
+		return map(
+				addressDao.getAddressByStreetAndNumber(
+						map(street), 
 						number));
 	}
 	
@@ -56,7 +55,7 @@ public class AddressServiceImpl implements AddressService {
 		Country country = new Country();
 		country.setName(name);
 		addressDao.save(country);
-		return CountryMapper.toTransfer(country);
+		return map(country);
 	}
 	
 	@Transactional
@@ -67,10 +66,10 @@ public class AddressServiceImpl implements AddressService {
 		city.setZip(zip);
 		city.setCountry(country);
 		
-		City persistent = CityMapper.toPersistent(city);
+		City persistent = map(city);
 		
 		addressDao.save(persistent);
-		return CityMapper.toTransfer(persistent);
+		return map(persistent);
 	}
 	
 	@Transactional
@@ -80,9 +79,9 @@ public class AddressServiceImpl implements AddressService {
 		street.setName(name);
 		street.setCity(city);
 		
-		Street persistent = StreetMapper.toPersistent(street);
+		Street persistent = map(street);
 		addressDao.save(persistent);
-		return StreetMapper.toTransfer(persistent);
+		return map(persistent);
 	}
 	
 	@Transactional
@@ -92,36 +91,36 @@ public class AddressServiceImpl implements AddressService {
 		address.setNumber(number);
 		address.setStreet(street);
 		
-		Address persistent = AddressMapper.toPersistent(address);
+		Address persistent = map(address);
 		addressDao.save(persistent);
-		return AddressMapper.toTransfer(persistent);
+		return map(persistent);
 	}
 	
 	@Override
 	public CountryTo save(CountryTo country) {
-		Country persistent = CountryMapper.toPersistent(country);
+		Country persistent = map(country);
 		addressDao.save(persistent);
-		return CountryMapper.toTransfer(persistent);
+		return map(persistent);
 	}
 	
 	@Override
 	public AddressTo save(AddressTo address) {
-		Address persistent = AddressMapper.toPersistent(address);
+		Address persistent = map(address);
 		addressDao.save(persistent);
-		return AddressMapper.toTransfer(persistent);
+		return map(persistent);
 	}
 	
 	@Override
 	public StreetTo save(StreetTo street) {
-		Street persistent = StreetMapper.toPersistent(street);
+		Street persistent = map(street);
 		addressDao.save(persistent);
-		return StreetMapper.toTransfer(persistent);
+		return map(persistent);
 	}
 	
 	@Override
 	public CityTo save(CityTo city) {
-		City persistent = CityMapper.toPersistent(city);
+		City persistent = map(city);
 		addressDao.save(persistent);
-		return CityMapper.toTransfer(persistent);
+		return map(persistent);
 	}
 }

@@ -16,7 +16,7 @@ import javax.persistence.UniqueConstraint;
 	        @UniqueConstraint(columnNames={"country", "zip"})
 	)
 @Entity
-public class City {
+public class City implements Persistent {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_city")
 	@SequenceGenerator(name = "seq_city", sequenceName = "seq_city", allocationSize = 50)

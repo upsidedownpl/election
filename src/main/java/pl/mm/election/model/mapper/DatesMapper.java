@@ -3,9 +3,9 @@ package pl.mm.election.model.mapper;
 import pl.mm.election.model.po.Dates;
 import pl.mm.election.model.to.DatesTo;
 
-public class DatesMapper {
+class DatesMapper implements Mapper<DatesTo, Dates>{
 	
-	public static Dates toPersistent(DatesTo to) {
+	public Dates toPersistent(DatesTo to) {
 		if(to == null) {
 			return null;
 		}
@@ -16,7 +16,7 @@ public class DatesMapper {
 		return po;
 	}
 	
-	public static DatesTo toTransfer(Dates po) {
+	public DatesTo toTransfer(Dates po) {
 		if(po == null) {
 			return null;
 		}
@@ -25,6 +25,16 @@ public class DatesMapper {
 		to.setBirthDate(po.getBirthDate());
 		to.setDeathDate(po.getDeathDate());
 		return to;
+	}
+	
+	@Override
+	public Class<Dates> persistentClass() {
+		return Dates.class;
+	}
+	
+	@Override
+	public Class<DatesTo> transferClass() {
+		return DatesTo.class;
 	}
 	
 }

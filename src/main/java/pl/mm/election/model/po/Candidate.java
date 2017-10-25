@@ -10,7 +10,7 @@ import javax.persistence.SequenceGenerator;
 
 @MappedSuperclass
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-public class Candidate {
+public abstract class Candidate {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_candidate")

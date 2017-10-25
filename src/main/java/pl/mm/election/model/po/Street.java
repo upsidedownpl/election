@@ -16,7 +16,7 @@ import javax.persistence.UniqueConstraint;
 	        @UniqueConstraint(columnNames={"city", "name"})
 	)
 @Entity
-public class Street {
+public class Street implements Persistent {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_street")

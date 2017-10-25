@@ -1,6 +1,6 @@
 package pl.mm.election.model.to;
 
-public class UserTo {
+public class UserTo implements Transfer {
 
 	private String login;
 
