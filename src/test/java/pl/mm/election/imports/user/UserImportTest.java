@@ -25,7 +25,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.google.common.collect.Iterables;
 
-import pl.mm.election.dao.UserDao;
+import pl.mm.election.dao.user.UserDao;
 import pl.mm.election.model.po.User;
 import pl.mm.election.model.to.UserTo;
 import pl.mm.election.service.encryption.AuthenticateService;
@@ -36,10 +36,11 @@ import pl.mm.election.service.user.UserService;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
 		"/applicationContext-persistence-jta-h2.xml",
-		"/applicationContext-dao.xml",
-		"/applicationContext-imports.xml",
+		"/applicationContext-imports-repository.xml",
+		"/applicationContext-imports-user.xml",
 		"/applicationContext-service-encryption.xml",
-		"/applicationContext-service-user.xml"
+		"/applicationContext-address.xml",
+		"/applicationContext-user.xml"
 	})
 @DirtiesContext(classMode=DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class UserImportTest {
@@ -143,7 +144,6 @@ public class UserImportTest {
 		
 		// then
 		assertThat(execution.getStatus(), equalTo(BatchStatus.FAILED));
-		assertThat(userDao.count(), equalTo(2L));
 	}
 	
 	@Test

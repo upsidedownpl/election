@@ -7,8 +7,20 @@
 
 	<persistence-unit name="pu" transaction-type="JTA">
 		<class>pl.mm.election.model.po.User</class>
+		
 		<class>pl.mm.election.model.po.Street</class>
 		<class>pl.mm.election.model.po.City</class>
+		<class>pl.mm.election.model.po.Country</class>
+		<class>pl.mm.election.model.po.Address</class>
+
+		<class>pl.mm.election.model.po.Names</class>
+		<class>pl.mm.election.model.po.Dates</class>
+		<class>pl.mm.election.model.po.Numbers</class>
+		<class>pl.mm.election.model.po.Citizen</class>
+		<class>pl.mm.election.model.po.Candidate</class>
+		<class>pl.mm.election.model.po.PersonCandidate</class>
+		<class>pl.mm.election.model.po.OrganizationCandidate</class>
+		
 		<class>pl.mm.election.model.po.audit.LogEntry</class>
 		<properties>
 			<property name="hibernate.transaction.jta.platform"

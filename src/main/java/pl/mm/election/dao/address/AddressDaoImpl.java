@@ -1,4 +1,4 @@
-package pl.mm.election.dao;
+package pl.mm.election.dao.address;
 
 import java.util.List;
 

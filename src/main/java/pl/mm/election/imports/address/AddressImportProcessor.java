@@ -5,20 +5,20 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.item.ItemProcessor;
 
-import pl.mm.election.dao.AddressDao;
-import pl.mm.election.model.po.Address;
-import pl.mm.election.model.po.City;
-import pl.mm.election.model.po.Country;
-import pl.mm.election.model.po.Street;
+import pl.mm.election.model.to.AddressTo;
+import pl.mm.election.model.to.CityTo;
+import pl.mm.election.model.to.CountryTo;
+import pl.mm.election.model.to.StreetTo;
+import pl.mm.election.service.address.AddressService;
 
 public class AddressImportProcessor implements ItemProcessor<AddressImport, AddressImportTo>{
 
 	private static final Logger log = LoggerFactory.getLogger(AddressImportProcessor.class);
 	
-	private AddressDao addressDao;
+	private AddressService addressService;
 	
-	public AddressImportProcessor(AddressDao addressDao) {
-		this.addressDao = addressDao;
+	public AddressImportProcessor(AddressService addressService) {
+		this.addressService = addressService;
 	}
 
 	@Override
@@ -38,10 +38,10 @@ public class AddressImportProcessor implements ItemProcessor<AddressImport, Addr
 			throws AlreadyExistsAddressImportException, AddressImportException {
 		if(!StringUtils.isEmpty(a.getNumber())) {
 			if(addressImportTo.getStreet().getId() != null
-					&& addressDao.getAddressByStreetAndNumber(addressImportTo.getStreet(), a.getNumber()) != null) {
+					&& addressService.getAddressByStreetAndNumber(addressImportTo.getStreet(), a.getNumber()) != null) {
 				throw new AlreadyExistsAddressImportException();
 			} else {
-				Address address = new Address();
+				AddressTo address = new AddressTo();
 				address.setNumber(a.getNumber());
 				address.setStreet(addressImportTo.getStreet());
 				addressImportTo.setAddress(address);
@@ -54,15 +54,15 @@ public class AddressImportProcessor implements ItemProcessor<AddressImport, Addr
 
 	private void street(AddressImport a, AddressImportTo addressImportTo) throws AddressImportException {
 		if(!StringUtils.isEmpty(a.getStreet())) {
-			Street street = 
+			StreetTo street = 
 				addressImportTo.getCity().getId() != null
-				? addressDao.getStreetByNameAndCity(a.getStreet(), addressImportTo.getCity())
+				? addressService.getStreetByNameAndCity(a.getStreet(), addressImportTo.getCity())
 				: null;
 				
 			if(street != null) {
 				log.info("Street {} already exists", a.getStreet());
 			} else {
-				street = new Street();
+				street = new StreetTo();
 				street.setName(a.getStreet());
 				street.setCity(addressImportTo.getCity());
 			}
@@ -75,15 +75,15 @@ public class AddressImportProcessor implements ItemProcessor<AddressImport, Addr
 
 	private void city(AddressImport a, AddressImportTo addressImportTo) throws AddressImportException {
 		if(!StringUtils.isEmpty(a.getZip()) && !StringUtils.isEmpty(a.getCity())) {
-			City city = 
+			CityTo city = 
 				addressImportTo.getCountry().getId() != null
-				? addressDao.getCityByZipAndCountry(a.getZip(), addressImportTo.getCountry())
+				? addressService.getCityByZipAndCountry(a.getZip(), addressImportTo.getCountry())
 				: null;
 				
 			if(city != null) {
 				log.info("City {}/{} already exists", a.getCity(), a.getZip());
 			} else {
-				city = new City();
+				city = new CityTo();
 				city.setName(a.getCity());
 				city.setZip(a.getZip());
 				city.setCountry(addressImportTo.getCountry());
@@ -97,11 +97,11 @@ public class AddressImportProcessor implements ItemProcessor<AddressImport, Addr
 
 	private void country(AddressImport a, AddressImportTo addressImportTo) throws AddressImportException {
 		if(!StringUtils.isEmpty(a.getCountry())) {
-			Country country = addressDao.getCountryByName(a.getCountry());
+			CountryTo country = addressService.getCountryByName(a.getCountry());
 			if(country != null) {
 				log.info("Country {} already exists", a.getCountry());
 			} else {
-				country = new Country();
+				country = new CountryTo();
 				country.setName(a.getCountry());
 			}
 			addressImportTo.setCountry(country);

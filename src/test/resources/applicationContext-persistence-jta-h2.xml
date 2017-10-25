@@ -20,7 +20,7 @@
 			<props>
 				<prop key="user">sa</prop>
 				<prop key="password"></prop>
-				<prop key="url">jdbc:h2:~/test</prop>
+				<prop key="url">jdbc:h2:mem:election</prop>
 			</props>
 		</property>
 		<property name="minPoolSize">
@@ -28,6 +28,9 @@
 		</property>
 		<property name="maxPoolSize">
 			<value>10</value>
+		</property>
+		<property name="maintenanceInterval">
+			<value>300</value>
 		</property>
 	</bean>
 
@@ -47,6 +50,7 @@
 	<bean id="atomikosTransactionManager" class="com.atomikos.icatch.jta.UserTransactionManager"
 		init-method="init" destroy-method="close">
 		<property name="forceShutdown" value="false" />
+		<property name="transactionTimeout" value="300" />
 	</bean>
 
 	<bean id="atomikosUserTransaction" class="com.atomikos.icatch.jta.J2eeUserTransaction">

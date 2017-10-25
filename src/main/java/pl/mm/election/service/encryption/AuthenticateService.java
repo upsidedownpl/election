@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import pl.mm.election.dao.UserDaoImpl;
+import pl.mm.election.dao.user.UserDaoImpl;
 import pl.mm.election.model.po.User;
 
 @Service

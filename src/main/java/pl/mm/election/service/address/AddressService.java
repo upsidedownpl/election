@@ -16,5 +16,18 @@ public interface AddressService {
 	StreetTo createStreet(String name, CityTo city);
 
 	AddressTo createAddress(String number, StreetTo street);
+ 
+	AddressTo getAddressByStreetAndNumber(StreetTo street, String number);
 
+	StreetTo getStreetByNameAndCity(String name, CityTo city);
+
+	CityTo getCityByZipAndCountry(String zip, CountryTo country);
+
+	CountryTo save(CountryTo country);
+	
+	CityTo save(CityTo city);
+	
+	StreetTo save(StreetTo street);
+	
+	AddressTo save(AddressTo address);
 }

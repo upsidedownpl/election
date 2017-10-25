@@ -1,46 +1,46 @@
 package pl.mm.election.imports.address;
 
-import pl.mm.election.model.po.Address;
-import pl.mm.election.model.po.City;
-import pl.mm.election.model.po.Country;
-import pl.mm.election.model.po.Street;
+import pl.mm.election.model.to.AddressTo;
+import pl.mm.election.model.to.CityTo;
+import pl.mm.election.model.to.CountryTo;
+import pl.mm.election.model.to.StreetTo;
 
 public class AddressImportTo {
 
-	private Country country;
-	private Street street;
-	private City city;
-	private Address address;
+	private CountryTo country;
+	private StreetTo street;
+	private CityTo city;
+	private AddressTo address;
 
-	public Country getCountry() {
+	public CountryTo getCountry() {
 		return country;
 	}
 
-	public void setCountry(Country country) {
+	public void setCountry(CountryTo country) {
 		this.country = country;
 	}
 
-	public Street getStreet() {
+	public StreetTo getStreet() {
 		return street;
 	}
 
-	public void setStreet(Street street) {
+	public void setStreet(StreetTo street) {
 		this.street = street;
 	}
 
-	public City getCity() {
+	public CityTo getCity() {
 		return city;
 	}
 
-	public void setCity(City city) {
+	public void setCity(CityTo city) {
 		this.city = city;
 	}
 
-	public Address getAddress() {
+	public AddressTo getAddress() {
 		return address;
 	}
 
-	public void setAddress(Address address) {
+	public void setAddress(AddressTo address) {
 		this.address = address;
 	}
 	

@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import pl.mm.election.dao.AddressDao;
+import pl.mm.election.dao.address.AddressDao;
 import pl.mm.election.model.mapper.AddressMapper;
 import pl.mm.election.model.mapper.CityMapper;
 import pl.mm.election.model.mapper.CountryMapper;
@@ -25,9 +25,29 @@ public class AddressServiceImpl implements AddressService {
 	private AddressDao addressDao;
 	
 	@Override
-	@Transactional
 	public CountryTo getCountryByName(String name) {
 		return CountryMapper.toTransfer(addressDao.getCountryByName(name));
+	}
+	
+	@Override
+	public StreetTo getStreetByNameAndCity(String name, CityTo city) {
+		return StreetMapper.toTransfer(
+				addressDao.getStreetByNameAndCity(name, 
+						CityMapper.toPersistent(city)));
+	}
+	
+	@Override
+	public CityTo getCityByZipAndCountry(String zip, CountryTo country) {
+		return CityMapper.toTransfer(
+				addressDao.getCityByZipAndCountry(zip, 
+						CountryMapper.toPersistent(country)));
+	}
+	
+	@Override
+	public AddressTo getAddressByStreetAndNumber(StreetTo street, String number) {
+		return AddressMapper.toTransfer(
+				addressDao.getAddressByStreetAndNumber(StreetMapper.toPersistent(street), 
+						number));
 	}
 	
 	@Transactional
@@ -75,5 +95,33 @@ public class AddressServiceImpl implements AddressService {
 		Address persistent = AddressMapper.toPersistent(address);
 		addressDao.save(persistent);
 		return AddressMapper.toTransfer(persistent);
+	}
+	
+	@Override
+	public CountryTo save(CountryTo country) {
+		Country persistent = CountryMapper.toPersistent(country);
+		addressDao.save(persistent);
+		return CountryMapper.toTransfer(persistent);
+	}
+	
+	@Override
+	public AddressTo save(AddressTo address) {
+		Address persistent = AddressMapper.toPersistent(address);
+		addressDao.save(persistent);
+		return AddressMapper.toTransfer(persistent);
+	}
+	
+	@Override
+	public StreetTo save(StreetTo street) {
+		Street persistent = StreetMapper.toPersistent(street);
+		addressDao.save(persistent);
+		return StreetMapper.toTransfer(persistent);
+	}
+	
+	@Override
+	public CityTo save(CityTo city) {
+		City persistent = CityMapper.toPersistent(city);
+		addressDao.save(persistent);
+		return CityMapper.toTransfer(persistent);
 	}
 }

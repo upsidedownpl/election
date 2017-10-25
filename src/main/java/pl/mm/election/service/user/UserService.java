@@ -6,4 +6,7 @@ public interface UserService {
 
 	UserTo create(UserTo user, String password) throws UserCreationException;
 
+	UserTo getByLogin(String login);
+
+	UserTo create(UserTo user, byte[] password, byte[] salt);
 }

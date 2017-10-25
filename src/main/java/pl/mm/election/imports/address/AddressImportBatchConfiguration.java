@@ -1,9 +1,6 @@
 package pl.mm.election.imports.address;
 
-import java.util.List;
-
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.batch.core.Job;
@@ -13,7 +10,6 @@ import org.springframework.batch.core.configuration.annotation.StepBuilderFactor
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.item.ItemWriter;
-import org.springframework.batch.item.database.JpaItemWriter;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;
@@ -25,8 +21,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.task.TaskExecutor;
 
-import pl.mm.election.dao.AddressDao;
-import pl.mm.election.imports.JobCompletionNotificationListener;
+import pl.mm.election.imports.repository.JobCompletionNotificationListener;
+import pl.mm.election.service.address.AddressService;
 
 @Configuration
 public class AddressImportBatchConfiguration {
@@ -41,13 +37,7 @@ public class AddressImportBatchConfiguration {
 	private EntityManager em;
     
     @Autowired
-    private EntityManagerFactory entityManagerFactory;
-    
-    @Autowired
-    private TaskExecutor taskExecutor;
-    
-    @Autowired
-    private AddressDao addressDao;
+    private AddressService addressService;
     
     @Bean
     @StepScope
@@ -80,13 +70,13 @@ public class AddressImportBatchConfiguration {
     
     @Bean
     public AddressImportProcessor addressImportProcessor() {
-        return new AddressImportProcessor(addressDao);
+        return new AddressImportProcessor(addressService);
     }
     
     @Bean
     public ItemWriter<AddressImportTo> addressImportWriter() {
     	AddressImportWriter writer = new AddressImportWriter();
-        writer.setEntityManagerFactory(entityManagerFactory);
+        writer.setAddressService(addressService);
         return writer;
     }
     
@@ -100,7 +90,6 @@ public class AddressImportBatchConfiguration {
                 .reader(addressImportReader(null))
                 .processor(addressImportProcessor())
                 .writer(addressImportWriter())
-                .taskExecutor(taskExecutor)
                 .throttleLimit(4)
                 .build();
     }

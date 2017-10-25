@@ -1,4 +1,4 @@
-package pl.mm.election.imports.user;
+package pl.mm.election.imports.citizen;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -21,10 +21,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 
 import pl.mm.election.imports.repository.JobCompletionNotificationListener;
+import pl.mm.election.model.to.CitizenTo;
+import pl.mm.election.service.citizen.CitizenService;
 import pl.mm.election.service.user.UserService;
 
 @Configuration
-public class UserImportBatchConfiguration {
+public class CitizenImportBatchConfiguration {
 
 	@Autowired
     public JobBuilderFactory jobBuilderFactory;
@@ -36,19 +38,22 @@ public class UserImportBatchConfiguration {
 	private EntityManager em;
     
     @Autowired
+    private CitizenService citizenService;
+    
+    @Autowired
     private UserService userService;
     
     @Bean
     @StepScope
-    public FlatFileItemReader<UserImport> userImportReader(@Value("#{jobParameters[pathToFile]}") String pathToFile) {
-        FlatFileItemReader<UserImport> reader = new FlatFileItemReader<UserImport>();
+    public FlatFileItemReader<CitizenImport> citizenImportReader(@Value("#{jobParameters[pathToFile]}") String pathToFile) {
+        FlatFileItemReader<CitizenImport> reader = new FlatFileItemReader<CitizenImport>();
         reader.setResource(new ClassPathResource(pathToFile));
         reader.setLinesToSkip(1);
-        reader.setLineMapper(new DefaultLineMapper<UserImport>() {
+        reader.setLineMapper(new DefaultLineMapper<CitizenImport>() {
         	
         	@Override
-			public UserImport mapLine(String line, int lineNumber) throws Exception {
-				UserImport result = super.mapLine(line, lineNumber);
+			public CitizenImport mapLine(String line, int lineNumber) throws Exception {
+        		CitizenImport result = super.mapLine(line, lineNumber);
 				result.setLineNumber(lineNumber);
 				return result;
 			}
@@ -56,11 +61,11 @@ public class UserImportBatchConfiguration {
         	{
         	
 	            setLineTokenizer(new DelimitedLineTokenizer() {{
-	                setNames(new String[] { "login", "password", "salt" });
+	                setNames(new String[] { "pesel", "firstName", "lastName", "birthDate", "deathDate", "user"});
 	                setDelimiter(";");
 	            }});
-	            setFieldSetMapper(new BeanWrapperFieldSetMapper<UserImport>() {{
-	                setTargetType(UserImport.class);
+	            setFieldSetMapper(new BeanWrapperFieldSetMapper<CitizenImport>() {{
+	                setTargetType(CitizenImport.class);
 	            }});
         	}
         });
@@ -68,38 +73,38 @@ public class UserImportBatchConfiguration {
     }
     
     @Bean
-    public UserImportProcessor userImportProcessor() {
-        return new UserImportProcessor(userService);
+    public CitizenImportProcessor citizenImportProcessor() {
+        return new CitizenImportProcessor(citizenService, userService);
     }
     
     @Bean
-    public ItemWriter<UserImportTo> userImportWriter() {
-        UserImportWriter writer = new UserImportWriter();
-        writer.setUserService(userService);
+    public ItemWriter<CitizenTo> citienImportWriter() {
+    	CitizenImportWriter writer = new CitizenImportWriter();
+    	writer.setCitizenService(citizenService);
         return writer;
     }
     
     @Bean
-    public Job userImportJob(JobCompletionNotificationListener listener) {
-        return jobBuilderFactory.get("userImportJob")
-                .incrementer(new RunIdIncrementer())
-                .listener(listener)
-                .flow(userImportStep())
-                .end()
+    public Step citizenImportStep() {
+        return stepBuilderFactory.get("citizenImport")
+                .<CitizenImport, CitizenTo> chunk(10)
+                .faultTolerant()
+                .skip(AlreadyExistsCitizenImportException.class)
+                .skipLimit(Integer.MAX_VALUE)
+                .reader(citizenImportReader(null))
+                .processor(citizenImportProcessor())
+                .writer(citienImportWriter())
+                .throttleLimit(4)
                 .build();
     }
     
     @Bean
-    public Step userImportStep() {
-        return stepBuilderFactory.get("userImportStep")
-                .<UserImport, UserImportTo> chunk(10)
-                .faultTolerant()
-                .skip(AlreadyExistsUserImportException.class)
-                .skipLimit(Integer.MAX_VALUE)
-                .reader(userImportReader(null))
-                .processor(userImportProcessor())
-                .writer(userImportWriter())
-                .throttleLimit(4)
+    public Job citizenImportJob(JobCompletionNotificationListener listener) {
+        return jobBuilderFactory.get("citizenImportJob")
+                .incrementer(new RunIdIncrementer())
+                .listener(listener)
+                .flow(citizenImportStep())
+                .end()
                 .build();
     }
 }

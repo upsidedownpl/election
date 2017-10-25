@@ -2,51 +2,44 @@ package pl.mm.election.imports.user;
 
 import java.util.stream.Collectors;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.item.ItemProcessor;
-import org.springframework.dao.DataAccessResourceFailureException;
-import org.springframework.orm.jpa.EntityManagerFactoryUtils;
 
 import com.google.common.base.CharMatcher;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Streams;
 import com.google.common.primitives.Bytes;
 
-import pl.mm.election.model.po.User;
+import pl.mm.election.model.to.UserTo;
+import pl.mm.election.service.user.UserService;
 
-public class UserImportProcessor implements ItemProcessor<UserImport, User>{
+public class UserImportProcessor implements ItemProcessor<UserImport, UserImportTo>{
 
 	private static final Logger log = LoggerFactory.getLogger(UserImportProcessor.class);
 	
-	private EntityManagerFactory entityManagerFactory;
+	private final UserService userService;
 	
-	public UserImportProcessor(EntityManagerFactory entityManagerFactory) {
-		this.entityManagerFactory = entityManagerFactory;
+	public UserImportProcessor(UserService userService) {
+		this.userService = userService;
 	}
 
 	@Override
-	public User process(UserImport u) throws Exception {
-		EntityManager entityManager = EntityManagerFactoryUtils.getTransactionalEntityManager(entityManagerFactory);
-		if (entityManager == null) {
-			throw new DataAccessResourceFailureException("Unable to obtain a transactional EntityManager");
-		}
-		
+	public UserImportTo process(UserImport u) throws Exception {
 		log.info("Processing user {}", u.getLogin());
-		User user = new User();
+		UserImportTo user = new UserImportTo();
 		if(!StringUtils.isEmpty(u.getLogin())) {
-			user.setLogin(u.getLogin());
+			UserTo newUser = new UserTo();
+			newUser.setLogin(u.getLogin());
+			user.setUser(newUser);
 		} else {
 			log.warn("Row with empty login");
 			throw new UserImportException();
 		}
 		
-		if(entityManager.find(User.class, user.getLogin()) != null) {
-			log.info("User {} already exists", user.getLogin());
+		if(userService.getByLogin(u.getLogin()) != null) {
+			log.info("User {} already exists", u.getLogin());
 			throw new AlreadyExistsUserImportException();
 		}
 		

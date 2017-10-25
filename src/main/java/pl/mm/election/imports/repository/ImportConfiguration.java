@@ -1,4 +1,4 @@
-package pl.mm.election.imports;
+package pl.mm.election.imports.repository;
 
 import javax.sql.DataSource;
 
@@ -19,7 +19,6 @@ import pl.mm.election.imports.user.UserImportBatchConfiguration;
 
 @EnableBatchProcessing
 @Configuration
-@Import({UserImportBatchConfiguration.class, AddressImportBatchConfiguration.class})
 public class ImportConfiguration implements BatchConfigurer {
 	
 	@Autowired

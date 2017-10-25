@@ -1,4 +1,4 @@
-package pl.mm.election.dao;
+package pl.mm.election.dao.address;
 
 import pl.mm.election.model.po.Address;
 import pl.mm.election.model.po.City;
