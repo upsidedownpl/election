@@ -3,28 +3,18 @@ package pl.mm.election.model.mapper;
 import pl.mm.election.model.po.Dates;
 import pl.mm.election.model.to.DatesTo;
 
-class DatesMapper implements Mapper<DatesTo, Dates>{
+class DatesMapper extends MapperImpl<DatesTo, Dates> implements Mapper<DatesTo, Dates>{
 	
-	public Dates toPersistent(DatesTo to) {
-		if(to == null) {
-			return null;
-		}
-		
-		Dates po = new Dates();
+	@Override
+	protected void mapTransferToPersistent(DatesTo to, Dates po) {
 		po.setBirthDate(to.getBirthDate());
 		po.setDeathDate(to.getDeathDate());
-		return po;
 	}
 	
-	public DatesTo toTransfer(Dates po) {
-		if(po == null) {
-			return null;
-		}
-		
-		DatesTo to = new DatesTo();
+	@Override
+	protected void mapPersistentToTransfer(Dates po, DatesTo to) {
 		to.setBirthDate(po.getBirthDate());
 		to.setDeathDate(po.getDeathDate());
-		return to;
 	}
 	
 	@Override
@@ -37,4 +27,13 @@ class DatesMapper implements Mapper<DatesTo, Dates>{
 		return DatesTo.class;
 	}
 	
+	@Override
+	protected Dates createPersistent() {
+		return new Dates();
+	}
+	
+	@Override
+	protected DatesTo createTransfer() {
+		return new DatesTo();
+	}
 }

@@ -20,6 +20,8 @@
 		<class>pl.mm.election.model.po.Candidate</class>
 		<class>pl.mm.election.model.po.PersonCandidate</class>
 		<class>pl.mm.election.model.po.OrganizationCandidate</class>
+		<class>pl.mm.election.model.po.Election</class>
+		<class>pl.mm.election.model.po.Vote</class>
 		
 		<class>pl.mm.election.model.po.audit.LogEntry</class>
 		<properties>

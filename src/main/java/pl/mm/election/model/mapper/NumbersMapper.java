@@ -3,30 +3,20 @@ package pl.mm.election.model.mapper;
 import pl.mm.election.model.po.Numbers;
 import pl.mm.election.model.to.NumbersTo;
 
-class NumbersMapper implements Mapper<NumbersTo, Numbers>{
+class NumbersMapper extends MapperImpl<NumbersTo, Numbers> implements Mapper<NumbersTo, Numbers>{
 	
 	NumbersMapper() {
 		//
 	}
 	
-	public Numbers toPersistent(NumbersTo to) {
-		if(to == null) {
-			return null;
-		}
-		
-		Numbers po = new Numbers();
+	@Override
+	protected void mapTransferToPersistent(NumbersTo to, Numbers po) {
 		po.setPesel(to.getPesel());
-		return po;
 	}
 	
-	public NumbersTo toTransfer(Numbers po) {
-		if(po == null) {
-			return null;
-		}
-		
-		NumbersTo to = new NumbersTo();
+	@Override
+	protected void mapPersistentToTransfer(Numbers po, NumbersTo to) {
 		to.setPesel(to.getPesel());
-		return to;
 	}
 	
 	@Override
@@ -37,5 +27,15 @@ class NumbersMapper implements Mapper<NumbersTo, Numbers>{
 	@Override
 	public Class<NumbersTo> transferClass() {
 		return NumbersTo.class;
+	}
+	
+	@Override
+	protected Numbers createPersistent() {
+		return new Numbers();
+	}
+	
+	@Override
+	protected NumbersTo createTransfer() {
+		return new NumbersTo();
 	}
 }

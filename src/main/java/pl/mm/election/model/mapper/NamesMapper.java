@@ -3,32 +3,22 @@ package pl.mm.election.model.mapper;
 import pl.mm.election.model.po.Names;
 import pl.mm.election.model.to.NamesTo;
 
-class NamesMapper implements Mapper<NamesTo, Names>{
+class NamesMapper extends MapperImpl<NamesTo, Names> implements Mapper<NamesTo, Names>{
 	
 	NamesMapper() {
 		//
 	}
 	
-	public Names toPersistent(NamesTo to) {
-		if(to == null) {
-			return null;
-		}
-		
-		Names po = new Names();
+	@Override
+	protected void mapTransferToPersistent(NamesTo to, Names po) {
 		po.setFirstName(to.getFirstName());
 		po.setLastName(to.getLastName());
-		return po;
 	}
 	
-	public NamesTo toTransfer(Names po) {
-		if(po == null) {
-			return null;
-		}
-		
-		NamesTo to = new NamesTo();
+	@Override
+	protected void mapPersistentToTransfer(Names po, NamesTo to) {
 		to.setFirstName(po.getFirstName());
 		to.setLastName(po.getLastName());
-		return to;
 	}
 	
 	@Override
@@ -41,4 +31,13 @@ class NamesMapper implements Mapper<NamesTo, Names>{
 		return NamesTo.class;
 	}
 	
+	@Override
+	protected Names createPersistent() {
+		return new Names();
+	}
+	
+	@Override
+	protected NamesTo createTransfer() {
+		return new NamesTo();
+	}
 }

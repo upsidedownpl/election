@@ -3,30 +3,20 @@ package pl.mm.election.model.mapper;
 import pl.mm.election.model.po.User;
 import pl.mm.election.model.to.UserTo;
 
-class UserMapper implements Mapper<UserTo, User>{
+class UserMapper extends MapperImpl<UserTo, User> implements Mapper<UserTo, User>{
 	
 	UserMapper() {
 		//
 	}
 	
-	public User toPersistent(UserTo to) {
-		if(to == null) {
-			return null;
-		}
-		
-		User po = new User();
+	@Override
+	protected void mapTransferToPersistent(UserTo to, User po) {
 		po.setLogin(to.getLogin());
-		return po;
 	}
 	
-	public UserTo toTransfer(User po) {
-		if(po == null) {
-			return null;
-		}
-		
-		UserTo to = new UserTo();
+	@Override
+	protected void mapPersistentToTransfer(User po, UserTo to) {
 		to.setLogin(po.getLogin());
-		return to;
 	}
 	
 	@Override
@@ -37,5 +27,15 @@ class UserMapper implements Mapper<UserTo, User>{
 	@Override
 	public Class<UserTo> transferClass() {
 		return UserTo.class;
+	}
+	
+	@Override
+	protected User createPersistent() {
+		return new User();
+	}
+	
+	@Override
+	protected UserTo createTransfer() {
+		return new UserTo();
 	}
 }

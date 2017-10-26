@@ -5,34 +5,24 @@ import pl.mm.election.model.to.CitizenTo;
 
 import static pl.mm.election.model.mapper.MapperFactory.map;
 
-class CitizenMapper implements Mapper<CitizenTo, Citizen>{
+class CitizenMapper extends MapperImpl<CitizenTo, Citizen> implements Mapper<CitizenTo, Citizen>{
 	
-	public Citizen toPersistent(CitizenTo to) {
-		if(to == null) {
-			return null;
-		}
-		
-		Citizen po = new Citizen();
+	@Override
+	protected void mapTransferToPersistent(CitizenTo to, Citizen po) {
 		po.setDates(map(to.getDates()));
 		po.setNames(map(to.getNames()));
 		po.setNumbers(map(to.getNumbers()));
 		po.setId(to.getId());
 		po.setUser(map(to.getUser()));
-		return po;
 	}
 	
-	public CitizenTo toTransfer(Citizen po) {
-		if(po == null) {
-			return null;
-		}
-		
-		CitizenTo to = new CitizenTo();
+	@Override
+	protected void mapPersistentToTransfer(Citizen po, CitizenTo to) {
 		to.setDates(map(po.getDates()));
 		to.setNames(map(po.getNames()));
 		to.setNumbers(map(po.getNumbers()));
 		to.setId(po.getId());
 		to.setUser(map(po.getUser()));
-		return to;
 	}
 	
 	@Override
@@ -43,5 +33,15 @@ class CitizenMapper implements Mapper<CitizenTo, Citizen>{
 	@Override
 	public Class<CitizenTo> transferClass() {
 		return CitizenTo.class;
+	}
+	
+	@Override
+	protected Citizen createPersistent() {
+		return new Citizen();
+	}
+	
+	@Override
+	protected CitizenTo createTransfer() {
+		return new CitizenTo();
 	}
 }

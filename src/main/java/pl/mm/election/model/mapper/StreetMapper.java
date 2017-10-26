@@ -4,34 +4,24 @@ import pl.mm.election.model.po.Street;
 import pl.mm.election.model.to.StreetTo;
 import static pl.mm.election.model.mapper.MapperFactory.map;
 
-class StreetMapper implements Mapper<StreetTo, Street>{
+class StreetMapper extends MapperImpl<StreetTo, Street> implements Mapper<StreetTo, Street>{
 	
 	StreetMapper() {
 		//
 	}
 	
-	public Street toPersistent(StreetTo to) {
-		if(to == null) {
-			return null;
-		}
-		
-		Street po = new Street();
+	@Override
+	protected void mapTransferToPersistent(StreetTo to, Street po) {
 		po.setName(to.getName());
 		po.setId(to.getId());
 		po.setCity(map(to.getCity()));
-		return po;
 	}
 	
-	public StreetTo toTransfer(Street po) {
-		if(po == null) {
-			return null;
-		}
-		
-		StreetTo to = new StreetTo();
+	@Override
+	protected void mapPersistentToTransfer(Street po, StreetTo to) {
 		to.setName(po.getName());
 		to.setId(po.getId());
 		to.setCity(map(po.getCity()));
-		return to;
 	}
 	
 	@Override
@@ -44,4 +34,13 @@ class StreetMapper implements Mapper<StreetTo, Street>{
 		return StreetTo.class;
 	}
 	
+	@Override
+	protected Street createPersistent() {
+		return new Street();
+	}
+	
+	@Override
+	protected StreetTo createTransfer() {
+		return new StreetTo();
+	}
 }

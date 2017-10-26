@@ -28,6 +28,8 @@ public class MapperFactory {
 		register(new NumbersMapper());
 		register(new StreetMapper());
 		register(new UserMapper());
+		register(new PersonCandidateMapper());
+		register(new VoteMapper());
 	}
 	
 	public static <T extends Transfer, P extends Persistent> void register(Mapper<T, P> mapper) {

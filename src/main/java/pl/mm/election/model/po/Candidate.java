@@ -1,5 +1,6 @@
 package pl.mm.election.model.po;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -8,9 +9,9 @@ import javax.persistence.InheritanceType;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.SequenceGenerator;
 
-@MappedSuperclass
-@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-public abstract class Candidate {
+@Entity
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+public abstract class Candidate implements Persistent {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_candidate")
